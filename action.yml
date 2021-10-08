@@ -1,0 +1,26 @@
+name: 'Terraform init azurerm backend'
+description: 'Runs Terraform init using the azurerm backend configuration, and saves the state file in an Azure storage account'
+inputs:
+  azure_credentials: 
+    description:  'Azure Credentials in JSON format'
+    required: true
+  resource_group_name:
+    description:  'State file location - resource group name'
+    required: true
+  container_name:
+    description:  'State file location - container name'
+    required: true
+  storage_account_name:
+    description:  'State file location - storage account name'
+    required: true
+  file_name:
+    description:  'State file location - file name'
+    required: false
+    default: 'terraform.tfstate'
+  
+runs:
+  using: "composite"
+  steps:
+    - id: terraformazurerminit
+      run: ${{ github.action_path }}/terraform-init.ps1 -azure_credentials ${{ inputs.Azure_Credentials }} -resource_group_name$ {{ inputs.resource_group_name }} -container_name {{ inputs.container_name }} -storage_account_name {{ inputs.storage_account_name }} -file_name {{ inputs.file_name }}
+      shell: pwsh
