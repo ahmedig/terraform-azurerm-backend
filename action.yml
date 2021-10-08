@@ -1,5 +1,8 @@
 name: 'Terraform init azurerm backend'
 description: 'Runs Terraform init using the azurerm backend configuration, and saves the state file in an Azure storage account'
+branding:
+  icon: 'aperture'  
+  color: 'blue'
 inputs:
   azure_credentials: 
     description:  'Azure Credentials in JSON format'
