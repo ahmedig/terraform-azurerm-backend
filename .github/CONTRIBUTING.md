@@ -41,22 +41,3 @@ People *love* thorough bug reports. I'm not even kidding.
 ## Use a Consistent Coding Style
 
 * Always run your framework linter before committing your code.
-
-# For repository owners
-## Branch rules
-By default, no branch protection rules are set up. Its your responsibility to protect the main branch and enforce pull requests, and code reviews.
-
-## Update the CODEOWNERS file
-Codeowners are automatically added to every pull request, and issues raised. Add your capability team lead name, and avoid adding individuals names.
-
-## Issues and pull requests management
-Issues and pull requests will be marked with the `stale` label after 50 days of inactivity. see `.github/workflows/stale.yml`
-Marked as stale issues and pull requests, will be locked after 60 days of inactivity. see `.github/workflows/lock.yml`
-
-## Bots installed
-### [Auto Assign Issues](https://github.com/andrewlock/auto-assign-issues)
-The bot uses the file `.github/auto_assign-issues.yml` for rules related to which assignees to assign the issues to.
-By default all issues go to the repo codeowners.
-
-
-
