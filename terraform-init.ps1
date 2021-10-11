@@ -31,7 +31,7 @@ param(
     [parameter(Mandatory = $true)]
     [string]$file_name,
 )
-
+Write-Host "starting action"
 $azure_creds = $azure_credentials | ConvertFrom-Json
 Write-Host "Running terraform Init using client id: $($azure_creds.clientId)"
 terraform init -reconfigure -input=false -backend-config=storage_account_name=$storage_account_name -backend-config=container_name=$container_name -backend-config=key=$file_name -backend-config=resource_group_name=$resource_group_name -backend-config=subscription_id=$azure_creds.subscriptionId -backend-config=tenant_id=$azure_creds.tenantId -backend-config=client_id=$azure_creds.clientId -backend-config=client_secret=$azure_creds.clientSecret
