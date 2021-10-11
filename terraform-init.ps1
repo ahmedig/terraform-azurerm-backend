@@ -21,7 +21,7 @@
     #>
 param(
     [parameter(Mandatory = $true)]
-    [string]$azure_credentials,
+    $azure_credentials,
     [parameter(Mandatory = $true)]
     [string]$storage_account_name,
     [parameter(Mandatory = $true)]
