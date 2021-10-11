@@ -29,7 +29,7 @@ param(
     [parameter(Mandatory = $true)]
     [string]$resource_group_name,
     [parameter(Mandatory = $true)]
-    [string]$file_name,
+    [string]$file_name
 )
 Write-Host "starting action"
 $azure_creds = $azure_credentials | ConvertFrom-Json
