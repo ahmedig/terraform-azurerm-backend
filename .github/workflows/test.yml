@@ -36,8 +36,8 @@ jobs:
           # Azure Credentials in JSON format
           azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
           # State file location - resource group name
-          resource_group_name: ghactiontest-rg
+          resource_group_name: ghaction-rg
           # State file location - container name
-          container_name: ghactiontest
+          container_name: ghaction
           # State file location - storage account name
-          storage_account_name: ghactiontest
+          storage_account_name: ghaction
