@@ -6,8 +6,8 @@ It runs exactly the same way as the Azure DevOps Terraform task:
 https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-tasks
 
 ## What it expects:
-This action doesnt need any other actions to run.
-The only thing it needs is an SPN credential
+This action doesnt rely on any other actions.
+The only thing it needs is an SPN, and to be saved as a secret.
 
 ### Creating an SPN credential
 Since the action needs an SPN credential to run, and to make it simple enough, it can leverage the same `AZURE_CREDENTIALS` secret that you need to set up anyway for any Azure action.
