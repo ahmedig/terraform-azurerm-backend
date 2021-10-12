@@ -29,5 +29,5 @@ runs:
   using: "composite"
   steps:
     - id: terraformazurerminit
-      run: ${{ github.action_path }}/terraform-init.ps1 -azure_credentials '${{ inputs.Azure_Credentials }}' -resource_group_name ${{ inputs.resource_group_name }} -container_name ${{ inputs.container_name }} -storage_account_name ${{ inputs.storage_account_name }} -file_name ${{ inputs.file_name }} -directory $ {{ inputs.tf_working_directory }}
+      run: ${{ github.action_path }}/terraform-init.ps1 -azure_credentials '${{ inputs.Azure_Credentials }}' -resource_group_name ${{ inputs.resource_group_name }} -container_name ${{ inputs.container_name }} -storage_account_name ${{ inputs.storage_account_name }} -file_name ${{ inputs.file_name }} -directory ${{ inputs.tf_working_directory }}
       shell: pwsh
