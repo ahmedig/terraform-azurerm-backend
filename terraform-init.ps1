@@ -37,6 +37,13 @@ param(
 )
 
 Write-Host "starting action"
+
+Write-Host "Storage account name: $storage_account_name"
+Write-Host "Container name: $container_name"
+Write-Host "Resource group name: $resource_group_name"
+Write-Host "file name: $file_name"
+
+
 pushd $directory
 Get-Location
 
