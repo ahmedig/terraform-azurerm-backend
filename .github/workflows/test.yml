@@ -32,7 +32,7 @@ jobs:
       - name: Terraform init azurerm backend
       # You may pin to the exact commit or the version.
       # uses: ahmedig/terraform-azurerm-backend@de5e6845254df2a464eaa31891bab20c2b4977e0
-        uses: ahmedig/terraform-azurerm-backend@${{GITHUB_REF#refs/heads/}}
+        uses: ahmedig/terraform-azurerm-backend@${{GITHUB_REF}}
         with:
           # Azure Credentials in JSON format
           azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
