@@ -14,6 +14,8 @@
     State file - Resource Group Name
     .PARAMETER file_name
     State file - State File name
+    .PARAMETER directory
+    Terraform working directory
     .NOTES
     Written by Ahmed Elsayed
     @ahmedig
@@ -21,7 +23,7 @@
     #>
 param(
     [parameter(Mandatory = $true)]
-    [string]$azure_credentials,
+    $azure_credentials,
     [parameter(Mandatory = $true)]
     [string]$storage_account_name,
     [parameter(Mandatory = $true)]
@@ -30,11 +32,41 @@ param(
     [string]$resource_group_name,
     [parameter(Mandatory = $true)]
     [string]$file_name,
+    [parameter(Mandatory = $true)]
+    [string]$directory
 )
 
-$azure_creds = $azure_credentials | ConvertFrom-Json
-Write-Host "Running terraform Init"
-terraform init -input=false -backend-config=storage_account_name=$storage_account_name -backend-config=container_name=$container_name -backend-config=key=$file_name -backend-config=resource_group_name=$resource_group_name -backend-config=subscription_id=$azure_creds.subscriptionId -backend-config=tenant_id=$azure_creds.tenantId -backend-config=client_id=$azure_creds.clientId -backend-config=client_secret=$azure_creds.clientSecret
+function Set-TFCreds() {
+    $azure_creds = $azure_credentials | ConvertFrom-Json
+    $env:ARM_CLIENT_ID = $azure_creds.clientId
+    $env:ARM_CLIENT_SECRET = $azure_creds.clientSecret
+    $env:ARM_SUBSCRIPTION_ID = $azure_creds.subscriptionId
+    $env:ARM_TENANT_ID = $azure_creds.tenantId
+}
+
+function Run-TFInit() {
+    terraform version
+    terraform init -reconfigure -input=false -backend-config="storage_account_name=$storage_account_name" -backend-config="container_name=$container_name" -backend-config="key=$file_name" -backend-config="resource_group_name=$resource_group_name"
+}
+
+function Show-Logs() {
+    Write-Host "Storage account name: $storage_account_name"
+    Write-Host "Container name: $container_name"
+    Write-Host "Resource group name: $resource_group_name"
+    Write-Host "file name: $file_name"
+}
+
+Write-Host "starting action"
+
+
+
+pushd $directory
+Get-Location
+
+Show-Logs
+Set-TFCreds
+Run-TFInit
 
 # Return password to workflow
 # echo "::set-output name=password::$GeneratedPassword"
+popd
