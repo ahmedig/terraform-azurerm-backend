@@ -34,7 +34,9 @@ param(
 Write-Host "starting action"
 $azure_creds = $azure_credentials | ConvertFrom-Json
 terraform version
-terraform init -reconfigure -input=false -backend-config=storage_account_name=$storage_account_name -backend-config=container_name=$container_name -backend-config=key=$file_name -backend-config=resource_group_name=$resource_group_name -backend-config=subscription_id=$azure_creds.subscriptionId -backend-config=tenant_id=$azure_creds.tenantId -backend-config=client_id=$azure_creds.clientId -backend-config=client_secret=$azure_creds.clientSecret
+terraform init -reconfigure -input=false -backend-config=storage_account_name=$storage_account_name -backend-config=container_name=$container_name -backend-config=key=$file_name -backend-config=resource_group_name=$resource_group_name
+# terraform init -backend-config=storage_account_name=$(STORAGE_ACCOUNT_NAME) -backend-config=container_name=$(CONTAINER_NAME) -backend-config=resource_group_name=$(RESOURCE_GROUP_NAME) -backend-config=key=aks_spns.tfstate -reconfigure
+
 
 # Return password to workflow
 # echo "::set-output name=password::$GeneratedPassword"
