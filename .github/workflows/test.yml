@@ -24,7 +24,6 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    working-directory: tests
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -50,3 +49,4 @@ jobs:
           container_name: ghaction
           # State file location - storage account name
           storage_account_name: ghaction
+          tf_working_directory: tests
