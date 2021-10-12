@@ -40,21 +40,14 @@ Write-Host "starting action"
 pushd $directory
 Get-Location
 
-function Set-TFCreds () {
-    $azure_creds = $azure_credentials | ConvertFrom-Json
-    $env:ARM_CLIENT_ID = $azure_creds.clientId
-    $env:ARM_CLIENT_SECRET = $azure_creds.clientSecret
-    $env:ARM_SUBSCRIPTION_ID = $azure_creds.subscriptionId
-    $env:ARM_TENANT_ID = $azure_creds.tenantId
-}
+$azure_creds = $azure_credentials | ConvertFrom-Json
+$env:ARM_CLIENT_ID = $azure_creds.clientId
+$env:ARM_CLIENT_SECRET = $azure_creds.clientSecret
+$env:ARM_SUBSCRIPTION_ID = $azure_creds.subscriptionId
+$env:ARM_TENANT_ID = $azure_creds.tenantId
+terraform version
+terraform init -reconfigure -input=false -backend-config=storage_account_name=$storage_account_name -backend-config=container_name=$container_name -backend-config=key=$file_name -backend-config=resource_group_name=$resource_group_name
 
-function Run-TFInit () {
-    terraform version
-    terraform init -reconfigure -input=false -backend-config=storage_account_name=$storage_account_name -backend-config=container_name=$container_name -backend-config=key=$file_name -backend-config=resource_group_name=$resource_group_name
-}
-
-Set-TFCreds
-Run-TFInit
 
 
 # Return password to workflow
