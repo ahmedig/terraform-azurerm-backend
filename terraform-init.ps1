@@ -35,10 +35,11 @@ param(
     [parameter(Mandatory = $true)]
     [string]$directory
 )
+Write-Host "starting action"
 pushd $directory
 Get-Location
 
-Write-Host "starting action"
+
 $azure_creds = $azure_credentials | ConvertFrom-Json
 terraform version
 terraform init -reconfigure -input=false -backend-config=storage_account_name=$storage_account_name -backend-config=container_name=$container_name -backend-config=key=$file_name -backend-config=resource_group_name=$resource_group_name
