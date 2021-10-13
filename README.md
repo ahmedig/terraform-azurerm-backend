@@ -38,7 +38,7 @@ Full example
 | storage_account_name | [ ] | nil | The storage account that the state file will be saved in |
 | container_name | [ ] | nil | container name in the storage account |
 | file_name | [x] | `terraform.tfstate` | the state file name |
-| subscription_id | [x] | default subscription in Azure_credentials | the subscription id where the resource group is located |
+| subscription_id | [x] | default subscription in Azure_credentials. You only need to set this if your SPN has got access to multiple subscriptions | the subscription id where the resource group is located |
 | tf_working_directory | [x] | root repo folder | the folder in the repo that has the terraform scripts |
 
 
