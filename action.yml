@@ -21,9 +21,9 @@ inputs:
     required: false
     default: 'terraform.tfstate'
   subscription_id:
-    description:  'State file location - resource group name'
+    description:  'Subscription Id of the resource group'
     required: false
-    default: null
+    default: 'empty'
   tf_working_directory:
     description:  'Terraform working directory'
     required: false

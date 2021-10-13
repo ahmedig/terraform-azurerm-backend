@@ -46,7 +46,7 @@ function Set-TFCreds() {
     $env:ARM_CLIENT_SECRET = $azure_creds.clientSecret
     $env:ARM_TENANT_ID = $azure_creds.tenantId
     
-    if([string]::IsNullOrEmpty($subscription_id))
+    if($subscription_id -eq 'empty')
     {
         $env:ARM_SUBSCRIPTION_ID = $azure_creds.subscriptionId
     }
