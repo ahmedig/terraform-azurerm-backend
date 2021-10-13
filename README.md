@@ -7,6 +7,17 @@ https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-
 
 ## Example usage
 
+bare minimum example
+```yml
+- name: Terraform init azurerm backend
+  uses: ahmedig/terraform-azurerm-backend@v1
+  with:
+    azure_credentials: {{ secrets.AZURE_CREDENTIALS }}
+    resource_group_name: myresourcegroup
+    container_name: mycontainer
+    storage_account_name: storageaccount432
+```
+Full example
 ```yml
 - name: Terraform init azurerm backend
   uses: ahmedig/terraform-azurerm-backend@v1
@@ -16,7 +27,7 @@ https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-
     container_name: mycontainer
     storage_account_name: storageaccount432
     file_name: terraform.tftstate
-    subscription_id: 
+    subscription_id: xxxxx-xxxxxx-xxxxxx-xxxxxx
     tf_working_directory: tfdirectory
 ```
 ## Parameters
