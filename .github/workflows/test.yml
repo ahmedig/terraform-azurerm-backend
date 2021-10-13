@@ -43,3 +43,4 @@ jobs:
           # State file location - storage account name
           storage_account_name: ghaction
           tf_working_directory: tests
+          subscription_id: '478f6ad2-a90a-4c08-ab44-4946858686ea'
