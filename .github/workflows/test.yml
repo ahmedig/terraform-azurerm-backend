@@ -32,7 +32,7 @@ jobs:
       - name: Terraform init azurerm backend
       # You may pin to the exact commit or the version.
       # uses: ahmedig/terraform-azurerm-backend@de5e6845254df2a464eaa31891bab20c2b4977e0
-        uses: ahmedig/terraform-azurerm-backend@main
+        uses: ahmedig/terraform-azurerm-backend@sub-id
         with:
           # Azure Credentials in JSON format
           azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
@@ -43,3 +43,4 @@ jobs:
           # State file location - storage account name
           storage_account_name: ghaction
           tf_working_directory: tests
+          subscription_id: xxxxx-xxxxxx-xxxxx-xxxxxx
