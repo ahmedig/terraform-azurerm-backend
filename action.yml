@@ -23,7 +23,7 @@ inputs:
   subscription_id:
     description:  'State file location - resource group name'
     required: false
-    default: ''
+    default: null
   tf_working_directory:
     description:  'Terraform working directory'
     required: false
