@@ -13,9 +13,11 @@
     .PARAMETER resource_group_name
     State file - Resource Group Name
     .PARAMETER file_name
-    State file - State File name
+    State file - State File name (optional)
     .PARAMETER directory
     Terraform working directory
+    .PARAMETER subscription_id
+    Subscription Id (optional)
     .NOTES
     Written by Ahmed Elsayed
     @ahmedig
@@ -33,15 +35,24 @@ param(
     [parameter(Mandatory = $true)]
     [string]$file_name,
     [parameter(Mandatory = $true)]
-    [string]$directory
+    [string]$directory,
+    [parameter(Mandatory = $true)]
+    [string]$subscription_id
 )
 
 function Set-TFCreds() {
     $azure_creds = $azure_credentials | ConvertFrom-Json
     $env:ARM_CLIENT_ID = $azure_creds.clientId
     $env:ARM_CLIENT_SECRET = $azure_creds.clientSecret
-    $env:ARM_SUBSCRIPTION_ID = $azure_creds.subscriptionId
     $env:ARM_TENANT_ID = $azure_creds.tenantId
+    
+    if($subscription_id -eq 'empty')
+    {
+        $env:ARM_SUBSCRIPTION_ID = $azure_creds.subscriptionId
+    }
+    else {
+        $env:ARM_SUBSCRIPTION_ID = $subscription_id
+    }
 }
 
 function Run-TFInit() {

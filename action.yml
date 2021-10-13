@@ -20,6 +20,10 @@ inputs:
     description:  'State file location - file name'
     required: false
     default: 'terraform.tfstate'
+  subscription_id:
+    description:  'Subscription Id of the resource group'
+    required: false
+    default: 'empty'
   tf_working_directory:
     description:  'Terraform working directory'
     required: false
@@ -29,5 +33,5 @@ runs:
   using: "composite"
   steps:
     - id: terraformazurerminit
-      run: ${{ github.action_path }}/terraform-init.ps1 -resource_group_name ${{ inputs.resource_group_name }} -container_name ${{ inputs.container_name }} -storage_account_name ${{ inputs.storage_account_name }} -file_name ${{ inputs.file_name }} -directory ${{ inputs.tf_working_directory }} -azure_credentials '${{ inputs.Azure_Credentials }}'
+      run: ${{ github.action_path }}/terraform-init.ps1 -subscription_id ${{ inputs.subscription_id }} -resource_group_name ${{ inputs.resource_group_name }} -container_name ${{ inputs.container_name }} -storage_account_name ${{ inputs.storage_account_name }} -file_name ${{ inputs.file_name }} -directory ${{ inputs.tf_working_directory }} -azure_credentials '${{ inputs.Azure_Credentials }}'
       shell: pwsh
