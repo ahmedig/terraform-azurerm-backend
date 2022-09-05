@@ -10,7 +10,7 @@ https://marketplace.visualstudio.com/items?itemName=ms-devlabs.custom-terraform-
 bare minimum example
 ```yml
 - name: Terraform init azurerm backend
-  uses: ahmedig/terraform-azurerm-backend@v1
+  uses: ahmedig/terraform-azurerm-backend@v4
   with:
     azure_credentials: {{ secrets.AZURE_CREDENTIALS }}
     resource_group_name: myresourcegroup
@@ -20,7 +20,7 @@ bare minimum example
 All options example
 ```yml
 - name: Terraform init azurerm backend
-  uses: ahmedig/terraform-azurerm-backend@v1
+  uses: ahmedig/terraform-azurerm-backend@v4
   with:
     azure_credentials: {{ secrets.AZURE_CREDENTIALS }}
     resource_group_name: myresourcegroup
@@ -62,7 +62,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Terraform init azurerm backend
-        uses: ahmedig/terraform-azurerm-backend@v1
+        uses: ahmedig/terraform-azurerm-backend@v4
         with:
           azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
           resource_group_name: myresourcegroup
