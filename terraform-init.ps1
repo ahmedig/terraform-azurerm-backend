@@ -42,20 +42,24 @@ param(
 
 function Set-TFCreds() {
     $azure_creds = $azure_credentials | ConvertFrom-Json
+
     $env:ARM_CLIENT_ID = $azure_creds.clientId
-    $env:AZURE_CLIENT_ID = $azure_creds.clientId
     $env:ARM_CLIENT_SECRET = $azure_creds.clientSecret
-    $env:AZURE_CLIENT_SECRET = $azure_creds.clientSecret
     $env:ARM_TENANT_ID = $azure_creds.tenantId
-    $env:AZURE_TENANT_ID = $azure_creds.tenantId
     
+    echo "ARM_CLIENT_ID=$env:ARM_CLIENT_ID" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+    echo "ARM_CLIENT_SECRET=$env:ARM_CLIENT_SECRET" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+    echo "ARM_TENANT_ID=$env:ARM_TENANT_ID" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+        
     if($subscription_id -eq 'empty')
     {
         $env:ARM_SUBSCRIPTION_ID = $azure_creds.subscriptionId
     }
     else {
         $env:ARM_SUBSCRIPTION_ID = $subscription_id
+        
     }
+    echo "ARM_SUBSCRIPTION_ID=$env:ARM_SUBSCRIPTION_ID" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
 }
 
 function Run-TFInit() {
