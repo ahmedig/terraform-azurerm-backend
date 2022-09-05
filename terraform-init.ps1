@@ -40,31 +40,33 @@ param(
     [string]$subscription_id
 )
 
-[System.Environment]::SetEnvironmentVariable('ARM_CLIENT_ID',$azure_creds.clientId)
-[System.Environment]::SetEnvironmentVariable('ARM_CLIENT_SECRET',$azure_creds.clientSecret)
-[System.Environment]::SetEnvironmentVariable('ARM_TENANT_ID',$azure_creds.tenantId)
-[System.Environment]::SetEnvironmentVariable('ARM_SUBSCRIPTION_ID',$azure_creds.subscriptionId)
-
 function Set-TFCreds() {
     $azure_creds = $azure_credentials | ConvertFrom-Json
-    [System.Environment]::SetEnvironmentVariable('ARM_CLIENT_ID',$azure_creds.clientId)
-    [System.Environment]::SetEnvironmentVariable('ARM_CLIENT_SECRET',$azure_creds.clientSecret)
-    [System.Environment]::SetEnvironmentVariable('ARM_TENANT_ID',$azure_creds.tenantId)
-#     $env:ARM_CLIENT_ID = $azure_creds.clientId
+#     [System.Environment]::SetEnvironmentVariable('ARM_CLIENT_ID',$azure_creds.clientId)
+#     [System.Environment]::SetEnvironmentVariable('ARM_CLIENT_SECRET',$azure_creds.clientSecret)
+#     [System.Environment]::SetEnvironmentVariable('ARM_TENANT_ID',$azure_creds.tenantId)
+    
+    echo "ARM_CLIENT_ID=$azure_creds.clientId" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+    echo "ARM_CLIENT_SECRET=$azure_creds.clientSecret" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+    echo "ARM_TENANT_ID=$azure_creds.tenantId" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+    
+    $env:ARM_CLIENT_ID = $azure_creds.clientId
 #     $env:AZURE_CLIENT_ID = $azure_creds.clientId
-#     $env:ARM_CLIENT_SECRET = $azure_creds.clientSecret
+    $env:ARM_CLIENT_SECRET = $azure_creds.clientSecret
 #     $env:AZURE_CLIENT_SECRET = $azure_creds.clientSecret
-#     $env:ARM_TENANT_ID = $azure_creds.tenantId
+    $env:ARM_TENANT_ID = $azure_creds.tenantId
 #     $env:AZURE_TENANT_ID = $azure_creds.tenantId
     
     if($subscription_id -eq 'empty')
     {
-        [System.Environment]::SetEnvironmentVariable('ARM_SUBSCRIPTION_ID',$azure_creds.subscriptionId)
-#         $env:ARM_SUBSCRIPTION_ID = $azure_creds.subscriptionId
+#         [System.Environment]::SetEnvironmentVariable('ARM_SUBSCRIPTION_ID',$azure_creds.subscriptionId)
+        echo "ARM_SUBSCRIPTION_ID=$azure_creds.subscriptionId" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+        $env:ARM_SUBSCRIPTION_ID = $azure_creds.subscriptionId
     }
     else {
-        [System.Environment]::SetEnvironmentVariable('ARM_SUBSCRIPTION_ID',$subscription_id)
-#         $env:ARM_SUBSCRIPTION_ID = $subscription_id
+#         [System.Environment]::SetEnvironmentVariable('ARM_SUBSCRIPTION_ID',$subscription_id)
+        echo "ARM_SUBSCRIPTION_ID=$subscription_id" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+        $env:ARM_SUBSCRIPTION_ID = $subscription_id
     }
 }
 
