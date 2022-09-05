@@ -40,6 +40,11 @@ param(
     [string]$subscription_id
 )
 
+[System.Environment]::SetEnvironmentVariable('ARM_CLIENT_ID',$azure_creds.clientId)
+[System.Environment]::SetEnvironmentVariable('ARM_CLIENT_SECRET',$azure_creds.clientSecret)
+[System.Environment]::SetEnvironmentVariable('ARM_TENANT_ID',$azure_creds.tenantId)
+[System.Environment]::SetEnvironmentVariable('ARM_SUBSCRIPTION_ID',$azure_creds.subscriptionId)
+
 function Set-TFCreds() {
     $azure_creds = $azure_credentials | ConvertFrom-Json
     [System.Environment]::SetEnvironmentVariable('ARM_CLIENT_ID',$azure_creds.clientId)
